@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/CloudAvenger/jmc-mining-app/_apis/build/status/CloudAvengers.jmc-mining-app)](https://dev.azure.com/CloudAvenger/jmc-mining-app/_build/latest?definitionId=2)
+
 # Simple Mean App
 Simple application to Add, Update, Remove, Search records using MEAN stack
 Records generated based on field array defined in app.js list.
