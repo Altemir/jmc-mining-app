@@ -1,0 +1,42 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "jmc10141528",
+    "namespace": "default",
+    "selfLink": "/api/v1/namespaces/default/services/jmc10141528",
+    "uid": "6ea37664-cf7a-11e8-a6d5-0a58ac1f24b7",
+    "resourceVersion": "24331",
+    "creationTimestamp": "2018-10-14T06:28:58Z",
+    "labels": {
+      "k8s-app": "jmc10141528"
+    }
+  },
+  "spec": {
+    "ports": [
+      {
+        "name": "tcp-80-3000-lx5kq",
+        "protocol": "TCP",
+        "port": 80,
+        "targetPort": 3000,
+        "nodePort": 31000
+      }
+    ],
+    "selector": {
+      "k8s-app": "jmc10141528"
+    },
+    "clusterIP": "10.0.81.101",
+    "type": "LoadBalancer",
+    "sessionAffinity": "None",
+    "externalTrafficPolicy": "Cluster"
+  },
+  "status": {
+    "loadBalancer": {
+      "ingress": [
+        {
+          "ip": "104.41.141.86"
+        }
+      ]
+    }
+  }
+}
