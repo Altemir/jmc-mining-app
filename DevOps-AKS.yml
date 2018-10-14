@@ -3,7 +3,7 @@
   "apiVersion": "v1",
   "metadata": {
     "name": "jmc10141528",
-    "namespace": "production",
+    "namespace": "default",
     "selfLink": "/api/v1/namespaces/default/services/jmc10141528",
     "uid": "6ea37664-cf7a-11e8-a6d5-0a58ac1f24b7",
     "resourceVersion": "24331",
