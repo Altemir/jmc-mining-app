@@ -29,7 +29,7 @@ spec:
         name: web
     spec:
       containers:
-      - image: cloudavengers91bf.azurecr.io/jmc-mining-app:v1
+      - image: jmcminingappchapter28d37.azurecr.io/jmc-mining-app:v1
         name: web
         ports:
         - containerPort: 3000
