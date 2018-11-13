@@ -12,7 +12,7 @@ app.use(express.static(__dirname + "/public"));
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(pagenate.middleware(10, 50));
+app.use(paginate.middleware(10, 50));
 
 app.all(function (req, res, next) {
     if (req.query.limit <= 10) req.query.limit = 10;
