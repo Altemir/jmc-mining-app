@@ -5,12 +5,19 @@ var express = require('express'),
     engines = require('consolidate'),
     assert = require('assert'),
     ObjectId = require('mongodb').ObjectID,
+    paginate = require('express-paginate'),
     url = 'mongodb://jmccosmosca:TUGYTOVScElRTdLB0HRHpIMge7Cz8ISM1U9DIF0vZAvvZQnaif9YZLLaBwaL2nQzKqlBvBYq9qE00Pwj1lwFpg==@jmccosmosca.documents.azure.com:10255/?ssl=true&replicaSet=globaldb';
 
 app.use(express.static(__dirname + "/public"));
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(pagenate.middleware(10, 50));
+
+app.all(function (req, res, next) {
+    if (req.query.limit <= 10) req.query.limit = 10;
+    next();
+});
 
 app.engine('html', engines.nunjucks);
 app.set('view engine', 'html');
