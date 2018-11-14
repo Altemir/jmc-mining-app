@@ -12,10 +12,10 @@ app.use(express.static(__dirname + "/public"));
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(paginate.middleware(10, 50));
+app.use(paginate.middleware(20, 400));
 
 app.all(function (req, res, next) {
-    if (req.query.limit <= 10) req.query.limit = 10;
+    if (req.query.limit <= 20) req.query.limit = 20;
     next();
 });
 
@@ -35,17 +35,29 @@ MongoClient.connect(process.env.MONGODB_URI || url,function(err, db){
 
     var records_collection = db.collection('records');
 
-    app.get('/records', function(req, res, next) {
+    app.get('/records', (req, res, next) => {
         // console.log("Received get /records request");
-        records_collection.find({}).toArray(function(err, records){
-            if(err) throw err;
+        records_collection.count(function (err, totalCount){
+            records_collection.find({}).limit(req.query.limit).skip(req.skip).toArray(function(err, records){
+                if(err) throw err;
 
-            if(records.length < 1) {
-                console.log("No records found.");
-            }
+                if(records.length < 1) {
+                    console.log("No records found.");
+                }
+
+                var pageCount = Math.ceil(totalCount / req.query.limit);
 
             // console.log(records);
-            res.json(records);
+            //res.json(records);
+
+                res.json({
+                    object: 'list',
+                    currentPage: req.query.page,
+                    has_more: paginate.hasNextPages(req)(pageCount),
+                    pages: paginate.getArrayPages(req)(20, pageCount, req.query.page),
+                    data: records
+                });
+            });
         });
     });
 
